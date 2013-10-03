@@ -13,14 +13,6 @@ class TodoList(models.Model):
     def __unicode__(self):
         return self.title
 
-class Comments(models.Model):
-    
-    commentId = models.AutoField(primary_key=True, db_column='CommentId')
-    todoId = models.ForeignKey(TodoList, db_column='taskId')
-    commets = models.TextField(db_column='comments')
-    
-    def __unicode__(self):
-        return u'%s %s' % (self.todoId,self.commets)
+
     
 admin.site.register(TodoList)
-admin.site.register(Comments)
