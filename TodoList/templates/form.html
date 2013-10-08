@@ -1,0 +1,55 @@
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="{{MEDIA_URL}}bootstrap/css/bootstrap.css">
+<script src="{{MEDIA_URL}}bootstrap/js/bootstrap.js"></script>
+<script src="{{MEDIA_URL}}bootstrap/js/bootstrap.min.js"></script>
+
+
+<link href="{{MEDIA_URL}}bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="{{MEDIA_URL}}bootstrap/css/bootstrap.css" rel="stylesheet">   
+</head>
+
+<body>
+  
+<h1 class="text-center"> Todo Manager </h1><br>
+
+       
+
+<div class="span6">
+  <form method=POST action="/create">{% csrf_token %}
+      <div class="controls controls-row">
+          <input id="name" name="name" type="text" class="span3" placeholder="Title"> 
+          
+      </div>
+      <div class="controls">
+          <textarea id="message" name="message" class="span6" placeholder="Your Description" rows="5"></textarea>
+      </div>
+      
+      <div class="controls">
+          <button id="contact-submit" type="submit" class="btn btn-primary input-medium pull-right">Submit</button>
+      </div>
+  </form>
+</div>
+<div class="controls">
+    
+<table class="table table-striped">
+   
+ {% for id,list in data.items %}
+<form method=GET action="/done"> 
+     {% if not list.checked %}
+     <tr>
+        <td>{{list.title}}</td>
+        <td width="50%" align="center">{{list.description}}</td>
+        <td>{{list.startdate}}</td>
+        <td><input type="checkbox" name="done" value="done">done</td>
+        <td><input type=submit name="completed" value="done"></td>
+        <input type=hidden name="todoid" value={{id}} />
+     </tr>
+     {%endif%}
+</form>
+     {% endfor %}  
+</table>
+ 
+</div>
+</body>
+</html>
